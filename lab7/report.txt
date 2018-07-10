@@ -1,0 +1,91 @@
+lab7
+Nick Palumbo
+February 26, 2015
+
+1. Discuss the advantages and disadvantages of printf debugging? 
+Note: there is no right answer to this, we are just looking for your 
+thoughts on the issue.
+
+The advantages of printf debugging is you are able to figure out the value 
+of a given variable when it hits a printf. However, the disadvantage of 
+using printf as a debugging method is that it can slow down processes a lot. 
+In the lab we had to use printf to show that it takes time to actually call 
+printf. This seemingly small pause in processing can be a problem for 
+dubigging certain code.
+
+2. Explain why the spiReadWrite function is called inside a higher level 
+peripheral function (the lcdWrite function).
+
+spiReadWrite is called inside the lcdWrite functions because in order for SPI to read 
+data, the register must have data on it. This is why lcdWrite is called before spiReadWrite 
+
+3. 
+a.) What does LCD_CS_DEASSERT() do? 
+
+LCD_CS_DEASSERT turns off the chip select. The funciton calls GPIO_SetBits(GPIOB, GPIO_Pin_12)
+and Pin 12 is our CS for our LCD in the lab. GPIO_SetBits will make the CS set to HIGH which 
+means that the slave is done communicating and data will not be transfered to this slave.
+
+b.) Why is it important?
+
+LCD_CS_DEASSERT is important because without deasserting the chip select,
+the slave would have a low signal and will be listening for all data being transfered.
+This can slow processing speed if the slave was not needed.
+
+4. Explain how the character data from the ASCII array in glcdfont.c gets 
+converted to pixels.
+
+Each character from the ASCII array gets transformed into pixels in a 6x10 region. 
+Each character gets defined with 'on' and 'off' pixels. This is why f3d_lcd_drawChar
+takes two colors. The first is the color for the text or 'on' color and the second
+is for the background or 'off' color. Each ASCII character is defined as 5x7 bit maps
+in glcdfont.c and placed on a 6x10 region. 5x7 lets the character have space in between
+lines and characters.
+
+5. Give the exact timing difference between the two versions of 
+f3d_lcd_fillScreen, from the Saleae analyzer, and explain why the new 
+function is faster.
+
+fillscreen = 0.209944 s
+fillscreen2 = 73.879 ms
+
+(0.209944 * 1000) - 73.879 = 136.065
+
+There is a 136.065 ms difference! The new funciton is faster because it does not print 
+individual pixels at a time. Instead, the new fillscreen prints a row of pixels at a time.
+This means less function calls which end up in less time to complete.
+
+
+Difficulties and Successes:
+
+In this lab we wrote a driver for the LCD that is on our STM32 Discovery 
+board. We had to write an application that read data form the gyro from our 
+previous lab and output axis information on the LCD screen. We also had to 
+use printf as a debugging tool. I did not know I had to put my for loop with 
+100s of printfs after led_on and led_off. Once I figured this out I was able 
+to see the LED turn into a strobe light which shows that printf takes time to 
+process when called. 
+
+The lab was fun to do because we had a lot of creative
+freedom when it came to makeing our visuals. What I decided to do was make 3
+bars, one for each axis and then had a baseline the would show when the axis
+value was positive or negative. I then made a simpe funciton that would draw
+a line from the data collected to the correct position on the correct axis bar.
+
+I could not figure out how to make the line msoothly glide across the bar so I
+wrote a simpe funciton to draw the marker line given the data and then print
+another line over that line another line that was the same color of the bar so
+that the marker line could be removed and there would not be multiple marker
+lines. 
+
+After getting the correct ourput on all three bars I went ahead and 
+implemented the user button. I made it so that each time the user button was
+pressed the LCD screen visual would change colors and the output information
+would change to the next axis. This was difficult because I had to rewrite
+every function that drew to the screen to take an extra parameter for a color.
+This allows me to pass colors around in functions and be able to draw with the
+desired color given the chosen axis. 
+
+Finally, I initiallized the LEDs to make
+the letter of the axis given. I could not make a visual Z so I made my 
+interpretation of a Z. 

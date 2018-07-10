@@ -1,0 +1,36 @@
+lab10
+Nick Palumbo
+March 29, 2016
+
+1. What are we doing here and how does it relate to what we know about SPI?
+
+The macro SD_CS_HIGH() sets the bits  and SD_CS_LOW() resets the bits. This is like the chip select in SPI
+
+2. Explain how you might use the *f3d_delay_uS()* function within the *delay()* function 
+to replace the delay loop below. What would you expect to be the advantage of using a timer over a delay loop?
+
+We use the board's processing instead of waiting and listening. The old delay has to check the assembly and see how 
+many loops to run.
+
+3. Read chapter 12 in the lab manual which covers DMA (direct memory access). Why might DMA be important in improving
+the performance of your image display application?
+
+The DMA shares the memory buses and peripheral buses with the CPU. There is no waiting to to hear from another bus because 
+of this sharing.
+
+4. Research the FAT file system and describe the function of the file allocation table. Explain how the corruption 
+of an entry in the table can cause part of a file to be lost.
+
+A FAT (file address table) is a table that an operating system uses to look up files on a disk. Because of fragmentation, 
+files can be all over a computer and a FAT is used to keep track of where the files are located.
+
+5. What is the difference between FAT16 and FAT32?
+
+FAT32's uses 32bit addresses and 16bit addresses while FAT16 only uses 16bit addresses. FAT32 is used to create larger 
+partitions. 
+
+Difficulties and Successes:
+Most of my time was spent on figuring out why the device was giving the error rc=3. After debugging for a 
+few hours I fouund that I had swapped the macros for setting the chip select. After figuring out the problem
+the code ran and I got the expected output. After that the lab was good. I went through and read some of the 
+chapters in the lab manual that gave helpful ideas on how to implement the needed functionality.

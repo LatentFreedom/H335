@@ -1,0 +1,36 @@
+lab9
+Nick Palumbo
+March 20, 2016
+
+Checkpoint 1: Registers
+
+r0     	       0x20000000	536870912
+r1     	       0x0	0
+r2     	       0x8000000        134217728
+r3     	       0xe000ed00	3758157056
+r4     	       0x92c	2348
+r5     	       0x0	0
+r6     	       0x0	0
+r7     	       0x0	0
+r8     	       0x0	0
+r9     	       0x0	0
+r10    	       0x0	0
+r11    	       0x0	0
+r12    	       0x0	0
+sp     	       0x20009ff8	0x20009ff8
+lr     	       0x8000273        134218355
+pc     	       0x800044c        0x800044c <main>
+cpsr   	       0x61000000	1627389952
+
+
+
+Checkpoint 2: Breakpoint before code breaks.
+
+Breakpoint 2, encryptStr (phrase=0x800f47f "", phrase@entry=0x800f478 "cow", 
+    key=0x800f47d "IG", key@entry=0x800f47c "PIG", 
+    ncrypt=ncrypt@entry=0x20009fec "3&0P\031\016\027") at main.c:63
+63	    ncrypt[i] = *key ^ *phrase;
+(gdb) cont
+Continuing.
+
+

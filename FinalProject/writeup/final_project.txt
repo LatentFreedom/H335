@@ -1,0 +1,76 @@
+Nick Palumbo
+Final Project
+April 29, 2016
+Team: Nick Palumbo (npalumbo), Kyle Nealy (knealy)
+
+Description of game concept and core functionality:
+
+  REDRAW is a simple memory game. Cells will be drawn on the LCD screen given a difficulty. There is 3 different options on the 
+difficulty select screen which are tutorial, easy, and hard. Easy will have cells drawn on a 4x8 grid and hard will have cells 
+drawn on a 8x8 grid. There is a timer that counts down with the LED as a visual and once the LEDs are all turned off, the user 
+will have to redraw the image shown to them. Each difficulty starts with only one cell being drawn in a random position.The user
+will have the Wii nunchuck as a controller and will use (c) to paint and (z) to unpaint. Once the user believes they have the 
+correct drawing that matches the one shown to them, they can press the blue (user-button) and their drawing will be checked with
+the test drawing. If the drawings match then the user will move to the next level where there will be an incremented number of 
+cells drawn randomly (i.e. level 1=1 cell, level 2=2 cells, etc.). However, if the user does not draw the correct cells in the 
+correct positions then they will have to restart the level and have a new picture drawn with the same number of cells.
+
+
+
+Task Breakdown between partners for the project: 
+
+Student that worked on these: Nick Palumbo
+1. Create a grid for the cells
+  a. create easy 4x8 cell grid
+    i.  implement array to hold 32 ints for user on/off cells
+    ii. implement array to hold 32 ints for test on/off cells
+  b. create hard 8x8 cell grid
+    i.  implement array to hold 64 ints for user on/off cells
+    ii. implement array to hold 64 ints for test on/off cells
+
+Student that worked on these: Nick Palumbo
+2. Create core functionality
+  a. implement LED timer
+    i. make LEDs slowly turn off as the test case is being shown
+  b. implement nunchuck reading for easy and hard difficulty
+    i.  c: paint a cell in the selected cell
+    ii. z: unpaint selected cell
+    iii. jy/jx: move slector around grid of cells
+  c. implement random function to place cells randomly given for each level
+    i. use RTC timer to get seconds and place the time into srand() to seed rand()
+  d. implement user-button
+    i. read user button after user paints cells and check test picture against user drawing
+  e. implement audio
+    i.   get WAV files online                    <-- (Kyle did this one part)
+    ii.  play a sound when the user wins a level
+    iii. play a sound when the user loses a level
+
+Student that worked on these: Nick Palumbo  
+3. Create graphics
+  a. draw/redraw cells
+    i.   draw white cells 
+    ii.  draw red cells when user missed a test cell
+    iii. draw green lines around cell to indicate selected cell
+  b. labels for user interface
+    i.  continue buttons
+    ii. titles on different screens
+  c. level/game screen
+    i.  draw a random cell and add it to the level array of cells to be drawn
+    ii. count down on LEDs till they are all off and send program to user paint mode loop
+  d. difficulty select screen
+    i.   tutorial option
+    ii.  easy 4x4 option
+    iii. hard 8x8 option
+  e. splash screen
+    i.   add a title for the game
+    ii.  add a simple animation in the middle
+    iii. add continue button 
+
+Student that worked on these: Nick Palumbo
+4. Test Test Test
+  a. try and find all possible breaks in code
+
+////// Did not get to implement these below //////
+
+5. implement shortest path to win
+6. keep track of highscores in a file to save to SD card

@@ -1,0 +1,26 @@
+Nick Palumbo
+Final Project
+April 29, 2016
+
+1. Describe each of the tasks that you were responsible for performing and how each contributed to the overall project:
+I began developing my game before a peer decided they wanted to be my partner. I left the door open for them to decide what they
+wanted to do because I was going to keep coding untill I had a final game that met all the requirements. Over three days I 
+implemented the entire game from start to finish. My partner found some sounds to use and changed a few lines of code that 
+helped draw red cells where the user of the game missed drawing a cell. 
+
+2. What technical challenges did you encounter in completing your tasks?
+Sometimes I had to wait to use a board because the board I was left with had error 255. Other times I had to figure out why code
+I tested yestarday ran fine and then all of a sudden stopped working on the same board. I had trouble getting sound to play 
+because I accidently put a few print statements before my initializers in my main which ended up making the sound files be 
+unreadable. After fixing the sound problem I was able to implement the whle game. Anther small problem was figuring out how to 
+make a random function on the board. With a reminder from a friend in the lab I saw that our f3d_rtc.c file had a timer within 
+it. I then copied over the rtc structure and made it so I could read seconds and seeded (srand()) the rand function with the rtc
+time in seconds. The random was good enough for what I wanted. The only problem was that, in some of the levels drawing more 
+than 1 cell, the random funciton could possibly come up with the same cell to draw. I liked this feature though and decided to 
+keep it. I figured that the game was hard enough, so if an easy level came at random with a few less cells drawn then the user 
+got a lucky level. 
+
+3. What would you do differently if you could start the project over?
+I would not change anything! I had fun and got my project done weeks before it was due so that I could work on other finals for 
+other classes. Having a partner that wanted to code anytime other than the day before would of been a benefit but I enjoyed 
+making the game and finding out all of my mistakes.

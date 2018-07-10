@@ -1,0 +1,24 @@
+Nick Palumbo
+lab4 
+February 8, 2016
+
+1) What are specs of the board you are using (ex. Speed, RAM, Flash)?
+	Speed: 100MHz
+	RAM:128 kb
+	Flash: 1024 kb
+
+2) What does GPIO stand for?
+	General purpose Input/Output 
+
+3) Is the provided delay function accurate? Why or why not?
+	Yes because there are no parameters. If there was a parameter then the function
+ 	would not be accurate
+
+4) What are the Port and Pin Numbers of the two Green LEDs?
+	Input: PE11 Output: r44
+	Input: PE15 Output: r43
+
+5) What are the public attributes of the GPIO_InitTypeDef Struct?
+	GPIO_Mode,GPIO_Speed,GPIO_Pin,GPIO_OType,GPIO_PuPd
+
+In Lab4 we had to make a simple application and download onto the Discovery Board. The function we had to write was a function that initialized the pins to be used for output which would in return be the lights that light up. We then had to initialize the input pin which would be the user button on the Discovery Board. This button, when pushed, would run the code we have that made the lights light up and turn off sequentially in a clockwise fashion. The problem we came across was how can we continually check for the input when the code will run only once? We figured out that an infinite while loop would do the job. Movie the infinite while loop at the end to have a function within the body of it made it so the Discovery Board would continuously check if the user button was pressed or not. Making our main function look nicer we had to implement our initializer functions in our f3d_led.c and f3d_user_btn.c files. 

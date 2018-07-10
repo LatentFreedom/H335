@@ -1,0 +1,16 @@
+lab11
+Nick Palumbo
+April 1, 2016
+
+Difficulties and successes:
+In the lab we had to implement interrupts and a circular queue. The circular queue had to pull and then 
+put characters through the serialT in a FIFO (first in first out) implementation. After figuring out that 
+the systick initializer would set the interrupt handler and we should put the code inside of the interrupt 
+handler we got the LEDs to work. We had trouble getting the queue to work because it was not giving the 
+right empty_queue output. We wrote a test main for our queue and found out that we were not modding (%) 
+all our tail increments so that the tail was pushing out further than the size of the queue and would never 
+be the same index as the head which our empty_queue checked. After modding where needed we got our queue to 
+work. The next problem came with finding out why our serialT was not getting any output. We started to think 
+that the interrupts and flushing were happening to fast but when we slowed them down we still did not get any 
+output. We decided that we might have to somehow wait on the getchar with a while(1) loop so we can get the 
+character before moving on. This was the issue and we finally were able to get an output.

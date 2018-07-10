@@ -1,0 +1,30 @@
+lab12
+Nick Palumbo
+April 8, 2016
+
+1.  What is the significance of the peripheral base address? Where does it point? 
+DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(&(SPIx->DR));
+
+The peripheral base address is needed because it stores the information that is transfered and received. The peripheral base address is pointing to DR(data register) where data will be stored for reading.
+
+2.  Why is it necessary to enable incrementing as was done in this step? What will the DMA controller do in response to this configuration.
+DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)tbuf;
+DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+
+It is necessary to enable incrementing because there is apossibility that there might be multiple structures. With incrementing implemented we can place each structur into a new address location. 
+
+3. Why is this line of the code necessary?
+while (DMA_GetFlagStatus(dmaflag) == RESET) { ; }
+
+This line of code is necessary because we need to wait for the dmaflag to be equal to RESET. If the dmaflag is not reset then there would be information constantly being read if information is writing. 
+
+4. For transfers of less than 4 bytes, what do you think is the reason for not using the xchng_datablock functions? 
+
+the xchng_datablock function makes space for 8 to 16 bytes and only sending 4 bytes means there is an empty space being taken up in memory. The empty space shold be avoided to keep efficienct data transfers.
+
+5. Why is it important for the DMA controller and the audio player to work on differnt portions of Audiobuf.
+
+Using different portions of the Audiobuf allows for the audio file being transfered to not get corrupted in any way. We do not want the file to be used by one and then allowing the other to use the same data.
+
+Difficulties and Succusses:
+There were a few difficulties during the lab. We were unable to get sound playing for the longest time because we has the wiring incorrect. After we understood that the wires did not have to be connnected to the actual audio subsystem, we wired everything correctly and got sounds to play. The next hard part was finding wav files that would actually play. We went with the first 3 sounds that played and stopped looking for them. Everything else was easy to implement. 

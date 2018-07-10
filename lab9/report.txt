@@ -1,0 +1,50 @@
+lab9
+Nick Palumbo
+March 20, 2016
+
+1. In previous labs, adding a peripheral has required pin initializations. 
+Why were able to add the nunchuk without initializing anything? 
+
+
+We are able to add the nunchuk without initializing anything because using the 
+I2C Protocol has the connection already prewired on the board and requires the 
+master to initialize communication with the slave by sending its signal across 
+that connection. since there are only two wires we are not required to initialize 
+extra connections which the previous protocols expected and needed in order to function.
+
+2. What are the major differences between these two functions and what does that 
+imply about communicating with the nunchuk?
+
+One of the major differences between these two functions is that the f3d_i2c1_read 
+function checks to see if the amount of information it will be reading is more than 
+a single bite of information. This is different from the f3d_i2c1_read_nunchuk function 
+which assumes/knows that it will be collecting more than one type of data because it 
+has data for each of the 6 variables to report on each time the read function is called.
+
+The f3d_i2c1_read_nunchuk function has a predetermined set of actions under which it can 
+operate successfully which also makes it different. Specifically the I2C bus is used to 
+initialize the nunchuk, which sends a signal setting the nunchuk to a known state. Then 
+the only other interactions with the nunchuk and polling it for the required data. 
+
+3. What do all of these variables correspond to in the nunchuk?
+
+unsigned char jx  : value for the joystick in the x direction (left and right)
+unsigned char jy  : value for the joystick in the y direction (up and down)
+unsigned short ax : nunchuk accelerometer value for the x direction
+unsigned short ay : nunchuk accelerometer value for the y direction
+unsigned short az : nunchuk accelerometer value for the z direction
+unsigned char c   : value for whether the C button on the nunchuk is pressed or not
+unsigned char z   : value for whether the Z button on the nunchuk is pressed or not
+
+4. Explain the code above.
+
+The code from Lab 9 question 4 uses a bitwise and (&) operator to compare the data collected from 
+the nunchuk for the buttons C and Z with the value 0x03. Using this it then determines which set 
+of values should be set for C and Z, whether their values should be 1 (being pushed) 
+or 0 (not being pushed). 
+
+Difficulties and successes:
+There were not a lot of difficulties except for deciphering how the nunchuck data was being read into each variable. 
+After figuring out wht each unsigned char meant I was able to use the data in the correct way so that I could get 
+the desired results. The questions were very interesting, especially the first one about why the nunchuck does not 
+to be initialized. Understanding how everything works together has become a lot easier. 

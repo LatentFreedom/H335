@@ -1,0 +1,34 @@
+lab5
+Nick Palumbo
+February 12, 2016
+
+1. How many connections are required to communicate over UART?
+
+5 connections are required to communicate over UART.
+
+2. What is the purpose of "alternate functions" for GPIO pins?
+
+Alternate funcitons allow a peripheral to have alternative modes for IO.
+
+3. Define "baud rate" in your own words.
+
+A baud rate is the frequency that two clocks have agreed upon and are running 
+at. The frequency is not guarenteed to be the exact same for each clock. 
+
+4. Why do we need newlib_stubs? Specifically, is there a reason that printf 
+won't work on the board without it?
+
+newlib_stubs is a file that allows us to use putstring, getchar, and putchar. 
+Without it we would not be able to use printf.
+
+5. Give an example of a situation in which the Saleae Logic Analyzer is the
+best debugging method and include a screen shot of the Logic application.
+
+The Saleae Logic Analyzers is very helpful getting a visual for when and what is 
+being transfered from computer to board.
+
+
+The hardest part about this lab was figuring out the saleae logic analizer. 
+I first downloaded the old version of the program and figured out I needed 
+to download the the beta version. This lab was straight forward otherwise 
+when it came to initializing pins and connecting wires for TX and RX. 

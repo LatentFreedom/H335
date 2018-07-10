@@ -1,0 +1,51 @@
+lab6
+Nick Palumbo
+February 25, 2016
+
+1. What does the CS pin do (the CS pin is called SS in the lab manual)?
+
+The CS “chip select” or SS “slave select” pin is the signal that we use to select the slave needed, in our case, the gyro for the lab. This pin allows the master to choose which slave to talk. The master initiates communication by lowering the SS signal.
+
+2. Why do you set the CS high at the end of the pin initializations?
+
+The CS is set to high at the end of pin initialization because when the signal is set to high, the slave is not talking. When the CS is set to low then frames are sent to the slave(s) selected.
+
+3. What other functions in f3d_gyro.c change CS from low to high or high to low?
+
+f3d_gyro_interface_init
+f3d_gyro_read
+f3d_gyro_write
+
+
+4. How do you hook up multiple peripherals on one SPI bus?
+
+Create a separate SS line for each slave. In order to use one of the slaves, all other slaves must have a SS signal set to high except for the slave you are going to be using which will have a SS signal set to low.
+
+5. The STM has an Operating Frequency of 72 MHz. When initializing SPI1, what do you set the baud rate prescaler to? What is the resulting SPI clock frequency?
+
+From looking in the f3d_gyro.c file (line 77), the baud rate prescaler is set to 8 for SPI1 peripherals, which is SPI_MEDIUM and the resulting SPI clock frequency is 72/8 MHz which is equal to 9 MHz.
+
+
+6. 
+
+a.) Does a peripheral (slave) need to be configured with the transmission speed before it can communicate with the microcontroler (master)? 
+
+Yes, because of the three steps needed to initialize a SPI module. Enable clocks to peripheral and associated SPIO ports, configure GPIO pins, and configure device.
+
+
+b.) Why would you want to be able to do on-the-fly changes in transmission speed?
+
+on-the-fly change could be necessary if a bus has two slaves with differing speeds.
+
+
+Difficulties and Successes:
+
+In this lab, we used GDB to fix a program with flaws and also develop an application to output velocities on the XYZ axis using the ST L3GD20 3-Axis Gyroscope on the F3 Discovery board. 
+
+When fixing the main.c within the debug directory we came across a few different problems. We changed each function using bit shift left to instead bit shift right because we understood this way better. We then made a single character array for an answer instead of 4 different ones. We had trouble when printing our all of our answers from each function because once the function after a function was called, the contents of the last answer was removed and turned into garbage. To make sure we output our answer when we get it, we moved each print statement to right after the answer was returned from the last function call. This made all of the answers print out.
+
+Moving onto the gyro part of the project we had more troubles. We easily initialized all of the SPI link pins because they replicated the format of the UART pin initialization. We just had to make sure the last line of our init was “GPIO_PinAFConfig(GPIOA,5,GPIO_AF_5);” was GPIOA because we are using pin PA#.The fourth pin was the same except for the last line was pin PE# “GPIO_Init(GPIOE,&GPIO_InitStructure);”. 
+
+The next trouble came when having to write f3d_gyro_write. We struggled with trying to figure out how to set the second bit. We then reread through the explanation of f3d_gyro_read and noticed that writing the second bit meant “WriteAddr |= (uint8_t)(0x40);”.
+
+After we finished the lab we came across a bug we could not figure out how to fix. We had everything working fine. Our LEDs were lighting up accordingly with the axis it was on and we had the button and getchar_nopause working for user input to changing the axis. However, when we “make download” we got a sporatic readings until we hit the reset button. We could not find the cause for this. 

@@ -1,0 +1,46 @@
+lab8
+Nick Palumbo
+March 11, 2016
+
+1. The accelerometer/magnetometer has 14 pins.
+
+ 1: Vdd_IO
+ 2: SCL
+ 3: SDA
+ 4: INT2
+ 5: INT1
+ 6: C1
+ 7: GND
+ 8: Reserved
+ 9: DRDY
+10: Reserved
+11: Reserved
+12: SETP
+13: SETC
+14: Vdd
+
+The accelerometer/magnetometer requires 2.16V minimum and can go to 3.6V 
+maximum.
+
+The accelerometer/magnetometer is located on the right side of the board above
+pin 5V and to the right of the power module.
+
+2. We must write to the accelerometer/magnometer before we can read from
+it because the device has no information to be read unless it is written
+to. We have to provide data to the slaves to prep them for data retreival. 
+
+3. The lines of code are saving the accelerometer data into a buffer that 
+is provided.
+
+4. Tilt compensation allows for a correct header reading and correct
+direction displayed. The pitch and roll will change the final header
+and this makes it so the pitch and roll need to be changed to level
+out the header when the board is tilted.
+
+Difficulties and successes:
+There were a few difficulties for this lab. Some of the difficulties included
+trying to find the correct degrees to display the right direction (e.g. North, 
+South). The next difficulty came from reading through the documentation
+and decifering how to compensate for tilt. After finding the formulas, the
+problem was solved. However, the boards are not very accurate when it comes to
+tilt compensation. 
